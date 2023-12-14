@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  nginx:
+    build: "."
+    ports:
+      - "8080:80"
+    depends_on:
+      - server-1
+      - server-2
+
+  server-1:
+    build: "./server-1"
+    # Add other necessary configuration for your Flask app 1
+
+  server-2:
+    build: "./server-2"
+    # Add other necessary configuration for your Flask app 2

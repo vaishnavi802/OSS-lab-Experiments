@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  lamp-app:
+    build:
+      context: .
+    image: my-lamp-app
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: sample_user
+      MYSQL_PASSWORD: sample_password
+
+  mysql:
+    image: mysql
+    mem_limit: 1000m
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: sample_db
+      MYSQL_USER: sample_user
+      MYSQL_PASSWORD: sample_password
+    volumes:
+      - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
